@@ -7,6 +7,9 @@ import os
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
+# Clear previous session data
+for key in st.session_state.keys():
+    del st.session_state[key]
 
 
 # ========================
@@ -114,13 +117,15 @@ st.title("GrowthPilot: AI-Powered GTM Strategy Builder")
 
 
 with st.form("gtm_form"):
-    product = st.text_input("Enter your product description", "AI video generation platform for indie filmmakers")
-    audience = st.text_input("Enter your target audience", "Indie filmmakers and ad agencies")
+    # Input fields with empty defaults
+    product = st.text_input("Enter your product description", value="")
+    audience = st.text_input("Enter your target audience", value="")
     budget = st.selectbox("Select your budget level", ["Low", "Medium", "High"])
     goal = st.selectbox("Primary goal of this GTM plan", ["Awareness", "Acquisition", "Retention"])
-    region = st.text_input("Target region", "North America")
-    industry = st.text_input("Industry focus", "Creative AI / Media")
+    region = st.text_input("Target region", value="")
+    industry = st.text_input("Industry focus", value="")
     submit_button = st.form_submit_button("Generate GTM Strategy")
+
 def create_pdf(report_text):
     buffer = io.BytesIO()
     pdf = canvas.Canvas(buffer, pagesize=letter)
