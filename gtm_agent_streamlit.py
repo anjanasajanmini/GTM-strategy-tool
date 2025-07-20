@@ -155,16 +155,17 @@ st.markdown(custom_css, unsafe_allow_html=True)
 # ========================
 # API KEYS
 # ========================
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # No need to set os.environ
-SERP_API_KEY = st.secrets["SERPAPI_API_KEY"]
+import os
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
+
 
 # Initialize GPT
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
-    model="gpt-4o-mini",  # Use "gpt-4" if you have access
-    temperature=0.2,
-    api_key=OPENAI_API_KEY  # Directly pass from secrets
+    model="gpt-4o-mini",  # or "gpt-4"
+    temperature=0.2
 )
 
 
