@@ -4,9 +4,6 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 from serpapi.google_search import GoogleSearch
 import os
-os.environ.pop("HTTP_PROXY", None)
-os.environ.pop("HTTPS_PROXY", None)
-os.environ.pop("ALL_PROXY", None)
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
@@ -162,12 +159,9 @@ import os
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
 
-
 # Initialize GPT
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(
-    model="gpt-4o-mini",  # or "gpt-4"
+ llm = ChatOpenAI(
+    model="gpt-4o-mini",
     temperature=0.2
 )
 
