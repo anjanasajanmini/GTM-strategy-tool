@@ -160,7 +160,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
 
 # Initialize GPT
- llm = ChatOpenAI(
+llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0.2
 )
