@@ -1,3 +1,4 @@
 [server]
-fileWatcherType = "none"
+maxUploadSize = 200
+enableXsrfProtection = false
 
