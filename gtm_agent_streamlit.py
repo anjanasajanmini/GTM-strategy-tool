@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 from serpapi.google_search import GoogleSearch
@@ -159,7 +159,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 SERP_API_KEY = st.secrets["SERPAPI_API_KEY"]
 
 # Initialize GPT
-llm = ChatOpenAI(model_name="gpt-4", temperature=0.2)
+llm = ChatOpenAI(model="gpt-4", temperature=0.2)
 
 # ========================
 # Fetch Competitors (SerpAPI)
