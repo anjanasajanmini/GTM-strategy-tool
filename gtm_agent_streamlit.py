@@ -9,6 +9,19 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
 
+
+# ========================
+# API KEYS
+# ========================
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
+
+# Initialize GPT
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.2
+)
+
 # Background Image
 page_bg_img = """
 <style>
@@ -151,19 +164,6 @@ div.streamlit-expanderContent, .stMarkdown, .stMarkdown p, .stMarkdown li, .stMa
 """
 st.markdown(custom_css, unsafe_allow_html=True)
 
-
-
-# ========================
-# API KEYS
-# ========================
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
-
-# Initialize GPT
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0.2
-)
 
 
 # ========================
