@@ -1,9 +1,10 @@
+import os
+os.environ["STREAMLIT_WATCHDOG"] = "false"
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 from serpapi.google_search import GoogleSearch
-import os
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
@@ -155,7 +156,6 @@ st.markdown(custom_css, unsafe_allow_html=True)
 # ========================
 # API KEYS
 # ========================
-import os
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 os.environ["SERPAPI_API_KEY"] = st.secrets["SERPAPI_API_KEY"]
 
