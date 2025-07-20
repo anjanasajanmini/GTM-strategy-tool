@@ -4,6 +4,9 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 from serpapi.google_search import GoogleSearch
 import os
+os.environ.pop("HTTP_PROXY", None)
+os.environ.pop("HTTPS_PROXY", None)
+os.environ.pop("ALL_PROXY", None)
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
