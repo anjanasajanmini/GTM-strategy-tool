@@ -159,7 +159,15 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 SERP_API_KEY = st.secrets["SERPAPI_API_KEY"]
 
 # Initialize GPT
-llm = ChatOpenAI(model="gpt-4", temperature=0.2)
+from langchain_openai import ChatOpenAI
+import os
+
+llm = ChatOpenAI(
+    model="gpt-4",
+    temperature=0.2,
+    api_key=os.getenv("OPENAI_API_KEY")  # or st.secrets["OPENAI_API_KEY"]
+)
+
 
 # ========================
 # Fetch Competitors (SerpAPI)
