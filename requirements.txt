@@ -1,10 +1,12 @@
 streamlit==1.29.0
-langchain==0.2.12
-langchain-openai==0.1.7
+langchain==0.2.6
+langchain-openai==0.1.6
 openai==1.47.0
 serpapi==0.1.5
 google-search-results==2.4.2
 reportlab==4.0.4
 python-dotenv==1.0.0
-pandas==2.2.2
-
+pandas==2.1.4
+pip>=25.1.1
+setuptools>=69.0.0
+wheel
