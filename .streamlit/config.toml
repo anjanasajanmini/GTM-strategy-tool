@@ -1,4 +1,7 @@
 [server]
-maxUploadSize = 200
-enableXsrfProtection = false
+headless = true
+
+[runner]
+magicEnabled = false
+
 
