@@ -7,6 +7,7 @@ import os
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
+
 # Background Image
 page_bg_img = """
 <style>
@@ -151,21 +152,19 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 
 
-
 # ========================
 # API KEYS
 # ========================
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]  # No need to set os.environ
 SERP_API_KEY = st.secrets["SERPAPI_API_KEY"]
 
 # Initialize GPT
 from langchain_openai import ChatOpenAI
-import os
 
 llm = ChatOpenAI(
-    model="gpt-4",
+    model="gpt-4o-mini",  # Use "gpt-4" if you have access
     temperature=0.2,
-    api_key=os.getenv("OPENAI_API_KEY")  # or st.secrets["OPENAI_API_KEY"]
+    api_key=OPENAI_API_KEY  # Directly pass from secrets
 )
 
 
