@@ -25,8 +25,9 @@ SERPAPI_API_KEY = st.secrets["SERPAPI_API_KEY"]
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0.2,
-    openai_api_key=OPENAI_API_KEY
+    api_key=OPENAI_API_KEY  # ✅ Correct
 )
+
 
 # ========================
 # Background Styling
