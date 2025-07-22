@@ -165,24 +165,62 @@ def create_pdf(report_text):
     buffer = io.BytesIO()
     pdf = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
+
+    # Fonts and spacing
     pdf.setFont("Helvetica", 11)
     y = height - 50
-    line_height = 14
-    max_width = 80  # max characters per line for wrapping
+    line_height = 16
+    max_width = width - 80  # 40px margin on both sides
 
-    for line in report_text.splitlines():
-        wrapped_lines = textwrap.wrap(line, width=max_width)
-        for wline in wrapped_lines:
-            if y < 50:
-                pdf.showPage()
-                pdf.setFont("Helvetica", 11)
-                y = height - 50
-            pdf.drawString(40, y, wline)
+    # Clean the text: Remove '#' and extra markdown characters
+    clean_text = report_text.replace("###", "").replace("##", "").replace("#", "").strip()
+
+    # Split text into lines
+    lines = clean_text.splitlines()
+
+    # Add proper heading styles
+    def draw_line(text, bold=False):
+        nonlocal y
+        if bold:
+            pdf.setFont("Helvetica-Bold", 13)
+        else:
+            pdf.setFont("Helvetica", 11)
+
+        # Wrap text if it exceeds page width
+        words = text.split()
+        current_line = ""
+        for word in words:
+            if pdf.stringWidth(current_line + " " + word, "Helvetica", 11) < max_width:
+                current_line += " " + word
+            else:
+                pdf.drawString(40, y, current_line.strip())
+                y -= line_height
+                current_line = word
+        if current_line:
+            pdf.drawString(40, y, current_line.strip())
             y -= line_height
+
+    # Loop through lines and apply formatting
+    for line in lines:
+        if y < 50:  # New page if too low
+            pdf.showPage()
+            pdf.setFont("Helvetica", 11)
+            y = height - 50
+
+        if line.strip() == "":
+            y -= line_height
+            continue
+        elif line.upper() == line and len(line.split()) < 6:  # Treat short all-caps as heading
+            draw_line(line, bold=True)
+        elif line.startswith("----"):  # Skip divider lines
+            continue
+        else:
+            draw_line(line)
 
     pdf.save()
     buffer.seek(0)
     return buffer
+
 
 if submit_button:
     if not product or not audience or not region or not industry:
